@@ -9,8 +9,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "http": "^0.0.1-security"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }
