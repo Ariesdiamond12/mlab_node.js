@@ -6,9 +6,48 @@ const PORT = 3000;
 app.use(express.json());
 
 let books = [
-  { id: 1, title: "The Great Gatsby", author: "F. Scott Fitzgerald" },
-  { id: 2, title: "To Kill a Mockingbird", author: "Harper Lee" },
-  { id: 3, title: "1984", author: "George Orwell" },
+  {
+    id: 1,
+    title: "The Great Gatsby",
+    author: "F. Scott Fitzgerald",
+    publisher: "Charles Scribner's Sons",
+    year: 1925,
+    isbn: "978-0743273565",
+  },
+
+  {
+    id: 2,
+    title: "To Kill a Mockingbird",
+    author: "Harper Lee",
+    publisher: "Meghan.M",
+    year: 1960,
+    isbn: "978-0061120084",
+  },
+
+  {
+    id: 3,
+    title: "1984",
+    author: "George Orwell",
+    publisher: "George  Orwell",
+    year: 1949,
+    isbn: "978-0451524935",
+  },
+  {
+    id: 4,
+    title: "CHANEL",
+    author: "Daniele Bott",
+    publisher: "Thames  & Hudson",
+    year: 2019,
+    isbn: "978-0500519904",
+  },
+  {
+    id: 5,
+    title: "It Ends With Us",
+    author: "Colleen Hoover",
+    publisher: "Atria Books",
+    year: 2016,
+    isbn: "978-1501161930",
+  },
 ];
 
 // GET all books
