@@ -1,6 +1,4 @@
-# Node.JS tasks
+# Node.JS task 6
 
-- This repository consists of all the node.js tasks
-- Each task has its own branch
-- Each task has its own README file explaining the task
-- Each task has its own folder with the task's code
+- This repository  contains the solution to the Node.JS task 6. The task is to create a function that
+- The task is to create an employee app using Node.js  to build a more rounded system
