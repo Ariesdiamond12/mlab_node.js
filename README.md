@@ -1,6 +1,16 @@
 # Node.JS tasks
 
-- This repository consists of all the node.js tasks
-- Each task has its own branch
-- Each task has its own README file explaining the task
-- Each task has its own folder with the task's code
+- I've created a card guessing game using Node.JS
+- I've used EJS which is  a templating engine for Node.JS to generate HTML markup with plain  JavaScript.
+- I've used Express.js 
+- I've created a simple user-friendly interface
+- I've used CSS to style the game
+- I've used JavaScript to add interactivity to the game
+
+# Installation Instructions
+1. Clone the repository using the command `git clone https://github.com/Ariesdiamond12/mlab_node.js/tree/task-5
+2. Install the required packages by running `npm install` in the terminal
+3. Start the server by running `node server.js` in the terminal
+4. Open a web browser and navigate to `http://localhost:3000` to play the game
+
+

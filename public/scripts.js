@@ -8,71 +8,71 @@ let tileCount = 36;
 let firstCard = null;
 let awaitingEndOfMove = false;
 
-// Fetch card letters from the server
-// fetch("/api/cards")
-//   .then((response) => response.json())
-//   .then((cards) => {
-//     lettersPickList = cards;
-//     buildCards();
-//   })
-//   .catch((error) => console.error("Error fetching cards:", error));
+// Select all tiles
+const tiles = document.querySelectorAll(".tile");
 
-// Create each card element with a click event
-function buildCard(letter) {
-  const element = document.createElement("div");
-  element.classList.add("tile");
-  element.setAttribute("data-letter", letter);
+// Add event listener to each tile
+tiles.forEach(tile => {
+  tile.addEventListener("click", flipCard);
+});
 
-  element.addEventListener("click", flipCard);
-
-  return element;
-}
-
-// Build up the card grid
-function buildCards() {
-  lettersPickList.forEach((letter) => {
-    const tile = buildCard(letter);
-    tilesContainer.appendChild(tile);
-  });
-}
-
-// Flip card functionality
 function flipCard() {
-  if (awaitingEndOfMove || this === firstCard) return;
+  const currentCard = this; // 'this' refers to the clicked card
 
-  this.classList.add("flipped");
-  this.style.backgroundColor = "#bf0603";
+  // Prevent flipping if awaiting end of move or if the same card is clicked
+  if (awaitingEndOfMove || currentCard === firstCard) return;
+
+  currentCard.classList.add("flipped");
+  currentCard.style.backgroundColor = "#967aa1";
 
   if (!firstCard) {
-    firstCard = this;
+    firstCard = currentCard; // Set the first card
     return;
   }
 
   awaitingEndOfMove = true;
 
+  // Check for a match
   if (
-    firstCard.getAttribute("data-letter") === this.getAttribute("data-letter")
+    firstCard.getAttribute("data-letter") ===
+    currentCard.getAttribute("data-letter")
   ) {
     // It's a match!
     setTimeout(() => {
       firstCard.classList.add("matched");
-      this.classList.add("matched");
+      currentCard.classList.add("matched");
       resetCards();
+      checkWinCondition();
     }, 500);
   } else {
     // Not a match
     setTimeout(() => {
       firstCard.classList.remove("flipped");
-      this.classList.remove("flipped");
+      currentCard.classList.remove("flipped");
       firstCard.style.backgroundColor = "";
-      this.style.backgroundColor = "";
+      currentCard.style.backgroundColor = "";
       resetCards();
     }, 1000);
   }
 }
 
-// Reset cards
 function resetCards() {
-  awaitingEndOfMove = false;
   firstCard = null;
+  awaitingEndOfMove = false;
 }
+
+function checkWinCondition() {
+  const matchedCards = document.querySelectorAll(".matched");
+  if (matchedCards.length === tileCount) {
+    document.getElementById("message-area").textContent = "Congratulations! You've won!";
+  }
+}
+
+// Select the reset button
+const resetButton = document.getElementById("reset-button");
+
+// Add click event listener to reload the page
+resetButton.addEventListener("click", () => {
+  window.location.reload(); // Reloads the page
+});
+

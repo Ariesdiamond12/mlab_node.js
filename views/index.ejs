@@ -12,11 +12,22 @@
       <div id="message-area"></div>
       <div class="tiles">
         <% for (let i = 0; i < shuffledCards.length; i++) { %>
-        <div class="tile" data-letter=<%= shuffledCards[i] %>>
-          <%= shuffledCards[i] %></div>
+        <div
+          class="tile"
+          data-letter="<%= shuffledCards[i] %>"
+        >
+          <span class="hidden-letter"><%= shuffledCards[i] %></span>
+        </div>
         <% } %>
       </div>
     </div>
+    
+    <!-- Reset Button outside game container to position it at the bottom -->
+    <div id="reset-container">
+      <button id="reset-button">Reset Game</button>
+    </div>
+    
+    
     <script src="../public/scripts.js"></script>
   </body>
 </html>
