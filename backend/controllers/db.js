@@ -4,7 +4,9 @@ const {db} =  require("../config/firebase")
 const  addNewUser = async (req, res) => {
     const  {name, email, phone, id, image, position} = req.body;
     try {
-        const  docRef = await addDoc(collection(db, "users"), {
+        const  docRef = await 
+        
+        (collection(db, "users"), {
             name,
             email,
             phone,
