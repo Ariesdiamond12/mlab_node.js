@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "express": "^4.21.1",
+    "firebase": "^11.0.1"
+  },
+  "name": "node.js_task1",
+  "version": "1.0.0",
+  "description": "- This repository consists of all the node.js tasks\r - Each task has its own branch\r - Each task has its own README file explaining the task\r - Each task has its own folder with the task's code",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
