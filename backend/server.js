@@ -1,13 +1,15 @@
-const http =  require('http');
 const express = require('express');
+const router = require('./routes/auth');
+const bodyParser = require('body-parser')
+const app = express();
 const port  = 3000;
 
+app.use (express.json());
+app.use(router);
+app.use(bodyParser.json)
 
-const server  = http.createServer((req, res) => {
-    console.log('Request made')
-})
 
-server.listen(port, 'localhost', () => {
-    console.log('Listening for request on port 3000');
-    
+
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 })
