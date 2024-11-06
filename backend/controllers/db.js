@@ -61,6 +61,27 @@ const updateUser = async (req, res) => {
       message: "Error  updating document",
     });
   }
-}; 
+};
 
-module.exports = { addNewUser, getUser, updateUser };
+const deleteUser = async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  
+  try {
+    const userRef = doc(db, "users", id);
+    console.log(userRef);
+    
+    await deleteDoc(userRef);
+    res.status(200).json({
+      message: "User deleted successfully!",
+    });
+  } catch (error) {
+    console, error("Error deleting user document:", error);
+    res.status(500).json({
+      message: "Error deleting user document",
+      error: error.message,
+    });
+  }
+};
+
+module.exports = { addNewUser, getUser, updateUser, deleteUser };
