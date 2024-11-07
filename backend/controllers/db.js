@@ -6,6 +6,7 @@ const {
   doc,
   getDocs,
 } = require("firebase/firestore");
+
 const { db } = require("../config/firebase");
 
 const addNewUser = async (req, res) => {
@@ -19,7 +20,7 @@ const addNewUser = async (req, res) => {
       image,
       position,
     });
-    res.json({ message: "User added successfully", docRef });
+    res.status(201).json({ message: "User added successfully", docRef });
     console.log("Document written with ID:", docRef.id);
   } catch (e) {
     console.error("Error adding document: ", e);
@@ -34,6 +35,7 @@ const getUser = async (req, res) => {
       id: doc.id,
       ...doc.data(),
     }));
+    console.log(users)
     res.status(200).json({
       message: "Users retrieved successfully",
       users: users,

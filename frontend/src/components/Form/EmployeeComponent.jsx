@@ -17,10 +17,14 @@ const EmployeeComponent = () => {
   const [selectedEmployee, setSelectedEmployee] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/employees_details")
-      .then((response) => response.json())
-      .then((data) => setEmployees(data));
+    fetchEmployees();
   }, []);
+
+  const fetchEmployees = async () => {
+    await fetch("http://localhost:3000/getUser")
+      .then((response) => response.json())
+      .then((data) => setEmployees(data.users));
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -28,19 +32,18 @@ const EmployeeComponent = () => {
       name,
       email,
       phone,
-      id,
+      userId: id,
       image,
       position,
     };
-    setEmployees([...employees, newEmployee]);
+
+    // setEmployees([...employees, newEmployee]);
     console.log("Form Data:", newEmployee);
 
     //Add to json server
-    fetch("http://localhost:3000/employees_details", {
+    fetch("http://localhost:3000/addUser", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newEmployee),
     })
       .then((response) => response.json())
@@ -48,33 +51,28 @@ const EmployeeComponent = () => {
         console.log("Employee added successfully:", data);
       });
 
+    fetchEmployees();
     resetForm();
   };
 
   const handleUpdate = (event) => {
     event.preventDefault();
-    const updatedEmployees = employees.map((employee) => {
-      if (employee.id === selectedEmployee.id) {
-        return {
-          name,
-          email,
-          phone,
-          id,
-          image,
-          position,
-        };
-      }
-      return employee;
-    });
-    setEmployees(updatedEmployees);
     resetForm();
   };
 
   const handleDelete = (employeeId) => {
-    const updatedEmployees = employees.filter(
-      (employee) => employee.id !== employeeId
-    );
-    setEmployees(updatedEmployees);
+    fetch(`http://localhost:3000/deleteUser/${employeeId}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Employee successfully deleted!", data);
+        fetchEmployees();
+      })
+      .catch((error) => {
+        console.error("Error deleting employee:", error);
+      });
   };
 
   const handleNameChange = (event) => setName(event.target.value);
@@ -132,6 +130,7 @@ const EmployeeComponent = () => {
       <NavbarComponent handleSearch={handleSearch} />
 
       <div id="container">
+        {console.log("employees:", employees)}
         {/* 1st Column */}
         <div className="form_column">
           <form onSubmit={selectedEmployee ? handleUpdate : handleSubmit}>
@@ -192,35 +191,39 @@ const EmployeeComponent = () => {
         <div className="output-column">
           <h1>Employee Details</h1>
 
-          {filteredEmployees.length !== 0 && filteredEmployees.map((employee) => (
-            <div key={employee.id}>
-              <h2>{employee.name}</h2>
-              <p>{employee.email}</p>
-              <p>{employee.phone}</p>
-              <p>{employee.position}</p>
-            </div>
-          ))}
+          {filteredEmployees.length !== 0 &&
+            filteredEmployees.map((employee) => (
+              <div key={employee.id}>
+                <h2>{employee.name}</h2>
+                <p>{employee.email}</p>
+                <p>{employee.phone}</p>
+                <p>{employee.position}</p>
+              </div>
+            ))}
 
-
-          {filteredEmployees.length === 0 && employees.map((employee) => (
-            <div key={employee.id}>
-              <p>Name: {employee.name}</p>
-              <p>Email: {employee.email}</p>
-              <p>Phone: {employee.phone}</p>
-              <p>
-                {/* Image:{" "} */}
-                <img src={employee.image} width={128} alt={employee.image} />
-              </p>
-              <p>Position: {employee.position}</p>
-              <p>ID: {employee.id}</p>
-              <button className="btn" onClick={() => handleEdit(employee)}>
-                Edit
-              </button>
-              <button className="btn" onClick={() => handleDelete(employee.id)}>
-                Delete
-              </button>
-            </div>
-          ))}
+          {filteredEmployees.length === 0 &&
+            employees.map((employee) => (
+              <div key={employee.id}>
+                <p>Name: {employee.name}</p>
+                <p>Email: {employee.email}</p>
+                <p>Phone: {employee.phone}</p>
+                <p>
+                  {/* Image:{" "} */}
+                  <img src={employee.image} width={128} alt={employee.image} />
+                </p>
+                <p>Position: {employee.position}</p>
+                <p>ID: {employee.id}</p>
+                <button className="btn" onClick={() => handleEdit(employee)}>
+                  Edit
+                </button>
+                <button
+                  className="btn"
+                  onClick={() => handleDelete(employee.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
         </div>
       </div>
     </>
