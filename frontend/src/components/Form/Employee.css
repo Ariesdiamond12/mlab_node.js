@@ -6,7 +6,7 @@
 .form_column {
   width: 30%;
   padding: 20px;
-  border: 2px solid;
+  border: 2px;
   background-color: #ffff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -16,7 +16,7 @@
 .output-column {
   width: 30%;
   padding: 20px;
-  border: 2px solid;
+  border: 2px;
   border-radius: 10px;
   background-color: #ffff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -66,7 +66,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #135d66;
+  background-color: #d90429;
   color: white;
   cursor: pointer;
 }

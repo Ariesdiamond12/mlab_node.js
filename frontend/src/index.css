@@ -11,8 +11,8 @@
   font-style: normal;
 }
 
-.container {
+#container {
   width: 100vw;
   min-height: 100vh;
-  background: #003c43;
+  background: #003356;
 }

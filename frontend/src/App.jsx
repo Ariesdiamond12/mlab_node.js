@@ -1,13 +1,17 @@
 import React from "react";
-import NavbarComponent from "./components/Navbar/NavbarComponent";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import EmployeeComponent from "./components/Form/EmployeeComponent";
+import Login from "./components/Super_Admins/Login";
+import SuperAdmins from "./components/Super_Admins/SuperAdmins";
 
 const App = () => {
   return (
-    <div className="container">
-      {/* <NavbarComponent /> */}
-      <EmployeeComponent />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login/>} />
+        <Route path="/superadmins" element={<SuperAdmins/>} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
