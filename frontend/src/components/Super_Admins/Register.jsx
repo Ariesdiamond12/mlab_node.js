@@ -1,25 +1,23 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../../config/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
-function Login() {
+function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const signIn = async (event) => {
+  const register = async (event) => {
     event.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, username, password);
+      await createUserWithEmailAndPassword(auth, username, password);
       setError(null);
-      setTimeout(() => {
-        navigate("/superadmins");
-      }, 1000);
+      navigate("/login");
     } catch (err) {
-      console.log(err);
-      setError(err);
+      console.error(err);
+      setError(err.message);
     }
   };
 
@@ -28,12 +26,12 @@ function Login() {
       <div className="flex justify-center items-center h-full">
         <form
           className="max-w-[400px] w-full mx-auto bg-white p-8 rounded-lg"
-          onSubmit={signIn}
+          onSubmit={register}
         >
-          <h2 className="text-3xl font-medium text-center py-8">Login</h2>
-          {error && <p className="text-red-500">{error.message}</p>}
+          <h2 className="text-3xl font-medium text-center py-8">Register</h2>
+          {error && <p className="text-red-500">{error}</p>}
           <div className="flex flex-col py-2">
-            <label>Username</label>
+            <label>Email</label>
             <input
               className="border p-2 rounded-lg"
               type="email"
@@ -57,15 +55,8 @@ function Login() {
               type="submit"
               className="py-3 bg-[#d90429] text-white rounded-full"
             >
-              Log In
+              Register
             </button>
-            <p>
-              Don't have an account yet?{" "}
-              <a className="text-[#003356]" href="./Registration">
-                Sign up
-              </a>
-            </p>
-            <div></div>
           </div>
         </form>
       </div>
@@ -73,4 +64,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
