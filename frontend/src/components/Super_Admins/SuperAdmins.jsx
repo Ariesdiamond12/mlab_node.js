@@ -9,8 +9,8 @@ function SuperAdmins() {
 
   const fetchAdmins = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/admins"); // Endpoint to fetch employees
-      setAdmins(response.data); // Adjust response.data if necessary based on API response
+      const response = await axios.get("http://localhost:3000/admins"); 
+      setAdmins(response.data); 
     } catch (err) {
       setError(err.message);
     }
@@ -23,7 +23,7 @@ function SuperAdmins() {
   const addAdmin = async () => {
     try {
       const newAdmin = { email: newAdminEmail };
-      await axios.post("http://localhost:3000/addAdmin", newAdmin); // Endpoint to add an employee
+      await axios.post("http://localhost:3000/addAdmin", newAdmin); 
       setNewAdminEmail("");
       fetchAdmins();
     } catch (err) {

@@ -8,9 +8,9 @@ const port = 3000;
 
 // CORS configuration
 const corsOptions = {
-  origin: "http://localhost:5173", // Update with your frontend's URL if different
-  methods: "GET,POST,PUT,DELETE", // Allowed methods
-  allowedHeaders: "Content-Type,Authorization", // Allowed headers
+  origin: "http://localhost:5173", 
+  methods: "GET,POST,PUT,DELETE", 
+  allowedHeaders: "Content-Type,Authorization", 
 };
 
 const serviceAccount = require("./firebase/ServiceAccount.json");
@@ -25,13 +25,10 @@ const db = admin.firestore();
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// Example function to assign a custom claim to a user
 const addSuperAdminRole = async (email) => {
   try {
-    // Get the user by email
     const user = await admin.auth().getUserByEmail(email);
 
-    // Set the custom claim (superAdmin role)
     await admin.auth().setCustomUserClaims(user.uid, { role: 'superAdmin' });
 
     console.log(`SuperAdmin role assigned to ${email}`);
@@ -48,13 +45,11 @@ app.post("/login", async (req, res) => {
   console.log(email , " ", password); 
 
   try {
-    // Sign in with Firebase Auth to verify email and password
     const userRecord = await admin.auth().getUserByEmail(email);
     if (
       userRecord.customClaims &&
       userRecord.customClaims.role === "superAdmin"
     ) {
-      // Assuming that the frontend provides a custom token for Firebase Auth login
       const customToken = await admin.auth().createCustomToken(userRecord.uid);
 
       res.status(200).json({ token: customToken });
@@ -101,7 +96,7 @@ app.post("/addEmployee", async (req, res) => {
   }
 });
 
-// Route to get all employees
+
 app.get("/employees", async (req, res) => {
   try {
     const snapshot = await db.collection("employees").get();
@@ -114,7 +109,6 @@ app.get("/employees", async (req, res) => {
     res.status(500).send(error.message);
   }
 });
-// app.use(router);
 
 app.use(bodyParser.json);
 
