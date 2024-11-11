@@ -1,13 +1,4 @@
-const {
-  collection,
-  addDoc,
-  updateDoc,
-  deleteDoc,
-  doc,
-  getDocs,
-} = require("firebase/firestore");
 
-const { db } = require("../config/firebase");
 
 const addNewUser = async (req, res) => {
   const { name, email, phone, userId, image, position } = req.body;
