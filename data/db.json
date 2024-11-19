@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Bananas",
+    "quantity": 1
+  },
+  {
+    "id": 2,
+    "name": "Ice Cream",
+    "quantity": 1
+  },
+  {
+    "id": 3,
+    "name": "Grapes",
+    "quantity": 3
+  },
+  {
+    "id": 4,
+    "name": "Juice",
+    "quantity": 4
+  }
+]

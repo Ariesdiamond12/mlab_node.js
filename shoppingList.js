@@ -1,9 +1,9 @@
-const fs = require("fs");
-const path = require("path");
-const http = require("http");
+const fs = require("fs");  //s (File System) module is used to interact with the file system on your computer
+const path = require("path");  //provides utilities for working with and manipulating file and directory paths
+const http = require("http");  //
 
 // Helper functions to handle JSON file operations
-const dataFilePath = path.join(__dirname, "data", "shopping-list.json");
+const dataFilePath = path.join(__dirname, "data", "db.json");
 
 const readData = () => {
   try {
@@ -68,20 +68,26 @@ const server = http.createServer((req, res) => {
     // POST a new item
   } else if (method === "POST" && url === "/items") {
     parseRequestBody(req, (body) => {
-      if (body && body.name && body.quantity) {
+      if (body) {
+        console.log("Received Body:", body);
+  
         const items = readData();
-        const newItem = {
-          id: items.length ? items[items.length - 1].id + 1 : 1,
-          name: body.name,
-          quantity: body.quantity,
-        };
+        console.log(items)
+        const newItem = { id: items.length + 1, ...body };
+        // const newItem = {
+        //   id: items.length ? items[items.length - 1].id + 1 : 1,
+        //   name: body.name,
+        //   quantity: body.quantity,
+        // };
+        console.log("New Item:", newItem);
+  
         items.push(newItem);
         writeData(items);
         sendJSON(res, 201, newItem);
       } else {
         sendJSON(res, 400, { message: "Invalid data" });
       }
-    });
+    });  
 
     // PUT (update) an item by ID
   } else if (method === "PUT" && url.match(/\/items\/\d+/)) {
