@@ -8,10 +8,9 @@
   </head>
   <body>
     <div id="game-container">
-      <h1><%= title %></h1>  //Dynamically renders the game title using the title variable passed from the server.
+      <h1><%= title %></h1> 
       <div id="message-area"></div>
       <div class="tiles">
-        //his is an EJS loop that iterates over the shuffledCards array, which is assumed to be passed from the server-side. For each card, a div is created with a data-letter attribute storing the card's value
         <% for (let i = 0; i < shuffledCards.length; i++) { %>
         <div
           class="tile"
