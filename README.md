@@ -1,4 +1,4 @@
-# Node.JS task 4 - Simple API for a book derectory
+# Node.JS task 4 - Simple API for a book directory
 
 - Create a simple API for a book directory using Node.js and Express.js
 - The API should have the following endpoints:

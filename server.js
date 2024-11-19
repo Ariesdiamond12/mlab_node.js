@@ -8,10 +8,10 @@ app.use(express.json());
 let books = [
   {
     id: 1,
-    title: "The Great Gatsby",
-    author: "F. Scott Fitzgerald",
+    title: "Atomic Habits",
+    author: "James Clear",
     publisher: "Charles Scribner's Sons",
-    year: 1925,
+    year: 2016,
     isbn: "978-0743273565",
   },
 
@@ -68,6 +68,9 @@ app.post("/api/books", (req, res) => {
     id: books.length + 1,
     title: req.body.title,
     author: req.body.author,
+    publisher: req.body.publisher,
+    year: req.body.year,
+    isbn: req.body.isbn,
   };
   books.push(newBook);
   res.status(201).json(newBook);
