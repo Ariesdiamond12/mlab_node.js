@@ -2,7 +2,7 @@
 
 - I've created a card guessing game using Node.JS
 - I've used EJS which is  a templating engine for Node.JS to generate HTML markup with plain  JavaScript.
-- I've used Express.js 
+- I've used Express.js which is a lightweight and flexible web application framework for Node.js. 
 - I've created a simple user-friendly interface
 - I've used CSS to style the game
 - I've used JavaScript to add interactivity to the game

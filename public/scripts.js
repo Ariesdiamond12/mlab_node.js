@@ -61,6 +61,7 @@ function resetCards() {
   awaitingEndOfMove = false;
 }
 
+//check whether the game has been won after each successful match
 function checkWinCondition() {
   const matchedCards = document.querySelectorAll(".matched");
   if (matchedCards.length === tileCount) {
