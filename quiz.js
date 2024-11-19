@@ -1,13 +1,13 @@
-const readline = require("readline");
-const util = require("util");
+const readline = require("readline"); //I've imported the readline module,it is used for command-line applications where user input is needed
+const util = require("util"); //I've imported the util module,it is used for utility functions like debugging and supporting asynchronous operations
 
-// Create an interface for reading input
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
+// Created an interface for reading input
+const rl = readline.createInterface({  //method is used to create an interface that allows you to interact with the user through input
+  input: process.stdin,  //represents the standard input stream - user input
+  output: process.stdout, //represents the standard output stream - output messages
 });
 
-// Promisify the question function to make it work asynchronously
+// creating a Promise-based version of the rl.question method from the Node.js readline module,
 const question = util.promisify(rl.question).bind(rl);
 
 // Timer function that resolves after a specific time
